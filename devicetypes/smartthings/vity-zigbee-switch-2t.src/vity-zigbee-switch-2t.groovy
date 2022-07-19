@@ -114,7 +114,7 @@ def ping() {
 def refresh() {
 
 	def refreshCommands = zigbee.onOffRefresh() + zigbee.electricMeasurementPowerRefresh()
-	def numberOfChildDevices = 2 //modelNumberOfChildDevices[device.getDataValue("model")] // Cập nhật số nút ấn công tắc
+	def numberOfChildDevices = 2 //modelNumberOfChildDevices[device.getDataValue("model")] // Cập nhật số nút ấn công tắc: 2 tương ứng 2 nút ấn
 	for(def endpoint : 2..numberOfChildDevices) {
 		refreshCommands += zigbee.readAttribute(zigbee.ONOFF_CLUSTER, 0x0000, [destEndpoint: endpoint])
 		refreshCommands += zigbee.readAttribute(zigbee.ELECTRICAL_MEASUREMENT_CLUSTER, 0x050B, [destEndpoint: endpoint])
