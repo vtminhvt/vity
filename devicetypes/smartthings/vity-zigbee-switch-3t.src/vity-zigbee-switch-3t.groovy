@@ -147,7 +147,7 @@ private getChildEndpoint(String dni) {
 def configure() {
 	log.debug "configure"
 	configureHealthCheck()
-	def numberOfChildDevices =3 //modelNumberOfChildDevices[device.getDataValue("model")]
+	def numberOfChildDevices =3 //modelNumberOfChildDevices[device.getDataValue("model")] // 3 nút ấn 
 	def configurationCommands = zigbee.onOffConfig(0, 120) + zigbee.electricMeasurementPowerConfig()
 	for(def endpoint : 2..numberOfChildDevices) {
 		configurationCommands += zigbee.configureReporting(zigbee.ONOFF_CLUSTER, 0x0000, 0x10, 0, 120, null, [destEndpoint: endpoint])
