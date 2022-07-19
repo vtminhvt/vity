@@ -72,7 +72,7 @@ def parse(String description) {
 }
 
 private void createChildDevices() {
-	def numberOfChildDevices = 1 //modelNumberOfChildDevices[device.getDataValue("model")] // Cập nhật số nút ấn công tắc
+	def numberOfChildDevices = 1 //modelNumberOfChildDevices[device.getDataValue("model")] // Cập nhật số nút ấn công tắc: 1- tương ứng 1 nút 
 	log.debug("createChildDevices(), numberOfChildDevices: ${numberOfChildDevices}")
 
 	for(def endpoint : 2..numberOfChildDevices) {
