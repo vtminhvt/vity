@@ -75,7 +75,7 @@ private void createChildDevices() {
 	def numberOfChildDevices = 1 //modelNumberOfChildDevices[device.getDataValue("model")] // Cập nhật số nút ấn công tắc: 1- tương ứng 1 nút 
 	log.debug("createChildDevices(), numberOfChildDevices: ${numberOfChildDevices}")
 
-	for(def endpoint : 2..numberOfChildDevices) {
+	for(def endpoint : (numberOfChildDevices >= 2 ? 2..numberOfChildDevices : [])) {
 		try {
 			log.debug "creating endpoint: ${endpoint}"
 			addChildDevice("Child Switch Health Power", "${device.deviceNetworkId}:0${endpoint}", device.hubId,
@@ -115,7 +115,7 @@ def refresh() {
 
 	def refreshCommands = zigbee.onOffRefresh() + zigbee.electricMeasurementPowerRefresh()
 	def numberOfChildDevices = 1 //modelNumberOfChildDevices[device.getDataValue("model")] // Cập nhật số nút ấn công tắc
-	for(def endpoint : 2..numberOfChildDevices) {
+	for(def endpoint : (numberOfChildDevices >= 2 ? 2..numberOfChildDevices : [])) {
 		refreshCommands += zigbee.readAttribute(zigbee.ONOFF_CLUSTER, 0x0000, [destEndpoint: endpoint])
 		refreshCommands += zigbee.readAttribute(zigbee.ELECTRICAL_MEASUREMENT_CLUSTER, 0x050B, [destEndpoint: endpoint])
 	}
@@ -144,7 +144,7 @@ def configure() {
 	configureHealthCheck()
 	def numberOfChildDevices =1 //modelNumberOfChildDevices[device.getDataValue("model")] // Cập nhật số nút ấn công tắc
 	def configurationCommands = zigbee.onOffConfig(0, 120) + zigbee.electricMeasurementPowerConfig()
-	for(def endpoint : 2..numberOfChildDevices) {
+	for(def endpoint : (numberOfChildDevices >= 2 ? 2..numberOfChildDevices : [])) {
 		configurationCommands += zigbee.configureReporting(zigbee.ONOFF_CLUSTER, 0x0000, 0x10, 0, 120, null, [destEndpoint: endpoint])
 		configurationCommands += zigbee.configureReporting(zigbee.ELECTRICAL_MEASUREMENT_CLUSTER, 0x050B, 0x29, 1, 600, 0x0005, [destEndpoint: endpoint])
 	}
@@ -171,6 +171,6 @@ private getChildCount() {
 			return 4
 		case "M":
 		default:
-			return 2
+			return 1
 	}
 }

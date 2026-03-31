@@ -12,8 +12,8 @@ definition(name: " VITY ZigBee Switch 4T", namespace: "smartthings", author: "vt
 
 
 		// Dectect Vity
-		//fingerprint profileId: "0104", inClusters: "0000, 0003, 0004, 0005, 0006, 0B04", deviceJoinName: "VITY3 Switch"
-		//fingerprint profileId: "0104", inClusters: "0000, 0003, 0004, 0005, 0006, 0702", deviceJoinName: "VITY3 Switch"
+		fingerprint profileId: "0104", inClusters: "0000, 0003, 0004, 0005, 0006, 0B04", deviceJoinName: "VITY4 Switch"
+		fingerprint profileId: "0104", inClusters: "0000, 0003, 0004, 0005, 0006, 0702", deviceJoinName: "VITY4 Switch"
 	}
 	
 
@@ -176,6 +176,6 @@ private getChildCount() {
 			return 4
 		case "M":
 		default:
-			return 3
+			return 4
 	}
 }
